@@ -1,0 +1,32 @@
+{*
+ * @param Paginator $paginator
+ * @param array     $steps
+ *}
+
+{var $link = $control->getParent()->link}
+{var $arrow_left = '<i class="fa fa-arrow-left"></i>'}
+{var $arrow_right = '<i class="fa fa-arrow-right"></i>'}
+
+<div class="pagination" n:if="$paginator->pageCount > 1">
+	{if $paginator->isFirst()}
+		<a class="first btn btn-sm btn-default disabled">{!$arrow_left} {_'ublaboo_datagrid.previous'}</a>
+	{else}
+		<a class="btn btn-sm btn-default ajax" href="{$link('page!', ['page' => $paginator->page - 1])}" rel="prev">{!$arrow_left} {_'ublaboo_datagrid.previous'}</a>
+	{/if}
+
+	{foreach $steps as $step}
+		{if $step == $paginator->page}
+			<a class="first btn btn-sm btn-primary active">{$step}</a>
+		{else}
+			<a class="btn btn-sm btn-default ajax" href="{$link('page!', ['page' => $step])}">{$step}</a>
+		{/if}
+		
+		{if $iterator->nextValue > $step + 1}<span>…</span>{/if}
+	{/foreach}
+
+	{if $paginator->isLast()}
+		<a class="first btn btn-sm btn-default disabled">{_'ublaboo_datagrid.next'} {!$arrow_right}</a>
+	{else}
+		<a class="btn btn-sm btn-default ajax" href="{$link('page!', ['page' => $paginator->page + 1])}" rel="next">{_'ublaboo_datagrid.next'} {!$arrow_right}</a>
+	{/if}
+</div>

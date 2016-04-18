@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @copyright   Copyright (c) 2015 ublaboo <ublaboo@paveljanda.com>
+ * @author      Pavel Janda <me@paveljanda.com>
+ * @package     Ublaboo
+ */
+
+namespace Ublaboo\DataGrid\Localization;
+
+use Nette;
+
+class SimpleTranslator extends Nette\Object implements Nette\Localization\ITranslator
+{
+
+	/**
+	 * @var array
+	 */
+	private $dictionary = [
+		'ublaboo_datagrid.no_item_found_reset' => 'No items found. You can reset the filter',
+		'ublaboo_datagrid.no_item_found' => 'No items found.',
+		'ublaboo_datagrid.here' => 'here',
+		'ublaboo_datagrid.items' => 'Items',
+		'ublaboo_datagrid.all' => 'all',
+		'ublaboo_datagrid.from' => 'from',
+		'ublaboo_datagrid.reset_filter' => 'Reset filter',
+		'ublaboo_datagrid.group_actions' => 'Group actions',
+		'ublaboo_datagrid.show_all_columns' => 'Show all columns',
+		'ublaboo_datagrid.hide_column' => 'Hide column',
+		'ublaboo_datagrid.action' => 'Action',
+		'ublaboo_datagrid.previous' => 'Previous',
+		'ublaboo_datagrid.next' => 'Next',
+		'ublaboo_datagrid.choose' => 'Choose',
+		'ublaboo_datagrid.choose_input_required' => 'Group action text not allow empty value',
+		'ublaboo_datagrid.execute' => 'Execute',
+		'ublaboo_datagrid.save' => 'Save',
+		'ublaboo_datagrid.cancel' => 'Cancel',
+	];
+
+
+	/**
+	 * @param array $dictionary
+	 */
+	public function __construct($dictionary = NULL)
+	{
+		if (is_array($dictionary)) {
+			$this->dictionary = $dictionary;
+		}
+	}
+
+
+	/**
+	 * Translates the given string
+	 * 
+	 * @param  string
+	 * @param  int
+	 * @return string
+	 */
+	public function translate($message, $count = NULL)
+	{
+		return isset($this->dictionary[$message]) ? $this->dictionary[$message] : $message;
+	}
+
+
+	/**
+	 * Set translator dictionary
+	 * @param array $dictionary
+	 */
+	public function setDictionary(array $dictionary)
+	{
+		$this->dictionary = $dictionary;
+	}
+
+}
